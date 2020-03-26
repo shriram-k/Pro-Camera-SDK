@@ -7,7 +7,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/proCameraSdkViewFinderView">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/cameraViewFinder"
@@ -26,7 +28,51 @@
         <Button
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/round_button"/>
+            android:background="@drawable/round_button"
+            android:id="@+id/proCameraSdkTakePhotoButton"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/proCameraSdkPreviewView"
+        android:visibility="gone"
+        android:background="#000">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/proCamerasdkPhotoPreview"
+            android:layout_alignParentTop="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/yesButton"
+                    android:text="yes"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/noButton"
+                    android:text="no"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>

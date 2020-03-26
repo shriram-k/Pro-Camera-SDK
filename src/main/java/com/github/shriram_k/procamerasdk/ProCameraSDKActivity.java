@@ -2,7 +2,9 @@ package com.github.shriram_k.procamerasdk;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -16,10 +18,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.github.shriram_k.procamerasdk.fragments.CameraFragment;
+import com.github.shriram_k.procamerasdk.fragments.PhotoPreviewFragment;
+import com.github.shriram_k.procamerasdk.interfaces.PhotoTaken;
 
 import java.util.Objects;
 
-public class ProCameraSDKActivity extends AppCompatActivity {
+public class ProCameraSDKActivity extends AppCompatActivity implements PhotoTaken {
     private String[] PERMISSIONS = new String[] {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private int PERMISSION_REQUEST_CODE = 3118;
@@ -74,7 +78,17 @@ public class ProCameraSDKActivity extends AppCompatActivity {
     private void startCameraFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.proCameraSdkfragmentView, new CameraFragment());
+        fragmentTransaction.replace(R.id.proCameraSdkfragmentView, new CameraFragment(this));
         fragmentTransaction.commit();
     }
+
+    @Override
+    public Image onPhotoTaken(Image image) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.proCameraSdkfragmentView, new PhotoPreviewFragment(image));
+        fragmentTransaction.commit();
+        return null;
+    }
+
 }
